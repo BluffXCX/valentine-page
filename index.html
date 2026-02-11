@@ -15,16 +15,8 @@
     </div>
   </div>
 
-  <!-- Floating hearts -->
+  <!-- Floating hearts container -->
   <div class="hearts"></div>
-
-  <!-- Floating images (stored in repo root) -->
-  <div class="floating-images">
-    <img src="1.jpg" alt="Photo 1" class="float-img">
-    <img src="2.jpg" alt="Photo 2" class="float-img">
-    <img src="3.png" alt="Photo 3" class="float-img">
-    <img src="4.jfif" alt="Photo 4" class="float-img">
-  </div>
 
   <script>
     // Floating hearts generator
@@ -47,17 +39,8 @@
       setTimeout(() => msg.remove(), 4000);
     });
 
-    // No button dodges but stays on screen
+    // No button dodges away
     const noBtn = document.getElementById("noBtn");
     noBtn.addEventListener("mouseover", () => {
-      const padding = 50; // keep away from edges
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
-      noBtn.style.position = "absolute";
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
-  </script>
-</body>
-</html>
-
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.inners
