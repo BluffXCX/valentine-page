@@ -1,130 +1,54 @@
-body {
-  background: linear-gradient(to bottom right, pink, lightcoral);
-  font-family: 'Cursive', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>💖 Will you be my Valentine, Gabbi? 💖</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
 
-.container {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 50px;
-  border-radius: 25px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.3);
-  z-index: 10;
-  animation: pulse 3s infinite;
-}
+  <!-- Floating hearts container -->
+  <div class="hearts"></div>
 
-h1 {
-  color: crimson;
-  margin-bottom: 40px;
-  font-size: 2.5em;
-}
+  <script>
+    // Floating hearts generator
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.querySelector(".hearts").appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 400);
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
+    // Yes button animation
+    document.getElementById("yesBtn").addEventListener("click", () => {
+      const msg = document.createElement("div");
+      msg.className = "popup";
+      msg.innerText = "Yay Gabbi! ❤️ You’re my Valentine!";
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 4000);
+    });
 
-button {
-  background: crimson;
-  color: white;
-  border: none;
-  padding: 15px 35px;
-  border-radius: 15px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-}
-
-button:hover {
-  background: darkred;
-  transform: scale(1.1);
-}
-
-#noBtn {
-  background: gray;
-}
-
-.hearts {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.heart {
-  position: absolute;
-  bottom: 0;
-  width: 20px;
-  height: 20px;
-  background: red;
-  transform: rotate(45deg);
-  animation: floatUp linear forwards;
-}
-
-.heart::before,
-.heart::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -10px;
-  left: 0;
-}
-
-.heart::after {
-  left: 10px;
-  top: 0;
-}
-
-@keyframes floatUp {
-  from {
-    transform: translateY(0) rotate(45deg);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-100vh) rotate(45deg);
-    opacity: 0;
-  }
-}
-
-.popup {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: crimson;
-  color: white;
-  padding: 20px 40px;
-  border-radius: 15px;
-  font-size: 22px;
-  animation: fadeInOut 4s ease forwards;
-}
-
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-  20% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  80% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
+    // No button dodges away when hovered
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+  </script>
+</body>
+</html>
 
