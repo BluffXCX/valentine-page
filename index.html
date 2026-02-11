@@ -8,18 +8,18 @@
 </head>
 <body>
   <div class="container">
-    <h1>💖 Will you be my Valentine? 💖</h1>
+    <h1>💖 Will you be my Valentine, Gabbi? 💖</h1>
     <div class="buttons">
       <button id="yesBtn">Yes</button>
       <button id="noBtn">No</button>
     </div>
   </div>
 
-  <!-- Floating hearts -->
+  <!-- Floating hearts container -->
   <div class="hearts"></div>
 
   <script>
-    // Generate floating hearts
+    // Floating hearts generator
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -28,21 +28,27 @@
       document.querySelector(".hearts").appendChild(heart);
       setTimeout(() => heart.remove(), 5000);
     }
-    setInterval(createHeart, 500);
+    setInterval(createHeart, 400);
 
     // Yes button animation
     document.getElementById("yesBtn").addEventListener("click", () => {
       const msg = document.createElement("div");
       msg.className = "popup";
-      msg.innerText = "Yay! ❤️ I love you!";
+      msg.innerText = "Yay Gabbi! ❤️ You’re my Valentine!";
       document.body.appendChild(msg);
-      setTimeout(() => msg.remove(), 3000);
+      setTimeout(() => msg.remove(), 4000);
     });
 
-    // No button does nothing
-    document.getElementById("noBtn").addEventListener("click", (e) => {
-      e.preventDefault();
+    // No button dodges away
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
     });
   </script>
 </body>
 </html>
+
